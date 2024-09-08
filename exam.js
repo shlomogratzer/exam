@@ -317,17 +317,33 @@ const newFirearms0 = {
       status: "Operational"
 
     }
-function Mission4(unit, firearm){
-    
-    if(unit.equipment.firearms[0].type === firearm.type){
-        unit.equipment.firearms[0].quantity += firearm.quantity
-    }
-    else{
-        unit.equipment.firearms.push(firearm)
-    }
-    console.log(unit)
-}
+    function Mission4(unit, firearm) {
+      let found = false;
+      
+      unit.equipment.firearms.forEach((element) => {
+          if (element.type === firearm.type && element.status === "Operational") {
+              element.quantity += firearm.quantity;
+              found = true;
+          }
+      });
+      
+      if (!found) {
+          unit.equipment.firearms.push(firearm);
+      }
+  
+      console.log(unit);
+  }
 Mission4(militaryUnit, newFirearms0)
+
+function Mission5(unit){
+  let sumDuration = 0
+
+  unit.trainingPrograms.forEach((element) =>{
+    sumDuration += element.duration
+  } );
+  console.log(sumDuration)
+}
+Mission5(militaryUnit)
 
 
 //   module.export = {
